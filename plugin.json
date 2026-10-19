@@ -1,0 +1,22 @@
+{
+        "url": "https://raw.githubusercontent.com/techmind09/sturdy-fishstick/builds/Vegamovies.cs3",
+        "status": 1,
+        "version": 10,
+        "name": "Vegamovies",
+        "internalName": "Vegamovies",
+        "authors": [
+            "Sturdy-fishstick"
+        ],
+        "description": "CloudStream provider that scrapes Vegamovies (Hollywood + Bollywood) with TMDB metadata and live-fill download servers.",
+        "fileSize": 58230,
+        "repositoryUrl": "https://github.com/techmind09/sturdy-fishstick",
+        "language": "hi",
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/techmind09/sturdy-fishstick/main/Vegamovies/icon.png",
+        "apiVersion": 1,
+        "fileHash": "sha256-53be0f3a8a47721e9eba923eb3e4d3394538e710664e7f05aa387fa3304f4d7b"
+    }
+]
