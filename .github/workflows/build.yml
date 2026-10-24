@@ -88,9 +88,9 @@ jobs:
                   manifest = json.loads(items['manifest.json'].decode('utf-8'))
                   for plugin_key, meta in PLUGIN_META.items():
                       if plugin_key.lower() in base.lower() or manifest.get('internalName', '').lower() == plugin_key.lower():
-                          manifest['name'] = meta['name']
-                          if 'iconUrl' in meta:
-                              manifest['iconUrl'] = meta['iconUrl']
+                        manifest['name'] = meta['name']
+                        if 'iconUrl' in meta:
+                            manifest['iconUrl'] = meta['iconUrl']
                   items['manifest.json'] = json.dumps(manifest, indent=2).encode('utf-8')
                   with zipfile.ZipFile(cs3_file, 'w', zipfile.ZIP_DEFLATED) as zout:
                       for name, data in items.items():
@@ -128,8 +128,10 @@ jobs:
           find . -name "*.jar" ! -name "gradle-wrapper.jar" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
           if [ -f "build/plugins.json" ]; then
             cp build/plugins.json $RUNNER_TEMP/build_artifacts/
+            cp build/plugins.json $RUNNER_TEMP/build_artifacts/repo.json
           elif [ -f "plugins.json" ]; then
             cp plugins.json $RUNNER_TEMP/build_artifacts/
+            cp plugins.json $RUNNER_TEMP/build_artifacts/repo.json
           fi
           if [ -f "repo.json" ]; then
             cp repo.json $RUNNER_TEMP/build_artifacts/
