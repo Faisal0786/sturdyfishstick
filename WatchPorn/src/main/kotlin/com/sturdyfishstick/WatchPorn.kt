@@ -1,4 +1,4 @@
-package com.sturdyfishstick.watchporn
+package com.sturdyfishstick
 
 import com.lagradost.api.Log
 import org.jsoup.nodes.Element
