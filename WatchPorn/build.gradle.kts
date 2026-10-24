@@ -1,10 +1,3 @@
-version = 7
-
-cloudstream {
-    authors     = listOf("techmind09")
-    language    = "en"
-    description = "High quality family porn from all over the world especially from manyvids, onlyfans, missax,tabooheat,adulttime and many more. Enjoy MILFs and stepmother with big tits and a lot of mommy roleplay action."
-    status  = 1 // will be 3 if unspecified
-    tvTypes = listOf("NSFW")
-    iconUrl = "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://watchporn.to/&size=32"
+plugins {
+    id("com.lagradost.cloudstream3.gradle")
 }
