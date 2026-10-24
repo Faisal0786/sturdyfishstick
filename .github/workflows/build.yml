@@ -1,4 +1,4 @@
-name: Build sturdyfishstick Plugins
+name: Build Sturdyfishstick Plugins
 
 concurrency:
   group: "build-${{ github.ref }}"
@@ -54,9 +54,9 @@ jobs:
         run: |
           if [ -f "gradlew" ] && [ -f "gradle/wrapper/gradle-wrapper.jar" ]; then
             chmod +x gradlew
-            ./gradlew make makePluginsJson --stacktrace || ./gradlew make --stacktrace
+            ./gradlew makePluginsJson --stacktrace || ./gradlew build --stacktrace
           else
-            gradle make makePluginsJson --stacktrace || gradle make --stacktrace
+            gradle makePluginsJson --stacktrace || gradle build --stacktrace
           fi
 
       - name: Ensure Real Plugin Names, Official Logos & Valid Hashes
