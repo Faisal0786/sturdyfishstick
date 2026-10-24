@@ -1,3 +1,2 @@
 rootProject.name = "CloudstreamPlugins"
-
-include(":AnimeDekho")
+include(":WatchPron")
