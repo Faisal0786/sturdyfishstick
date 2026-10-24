@@ -1,0 +1,26 @@
+[
+  {
+    "name": "AnimeDekho",
+    "internalName": "AnimeDekhoPlugin",
+    "version": 1,
+    "apiVersion": 1,
+    "description": "AnimeDekho - Watch Hindi Dubbed & Subbed Anime, Series, and Movies Online Free",
+    "authors": [
+      "techmind09"
+    ],
+    "tvTypes": [
+      "Anime",
+      "AnimeMovie",
+      "Cartoon",
+      "Movie",
+      "TvSeries"
+    ],
+    "language": "hi",
+    "status": 1,
+    "url": "https://raw.githubusercontent.com/techmind09/sturdyfishstick/builds/AnimeDekhoPlugin.cs3",
+    "fileHash": "",
+    "fileSize": 0,
+    "iconUrl": "https://animedekho.app/wp-content/uploads/2023/02/cropped-favicon-270x270.png",
+    "repositoryUrl": "https://github.com/techmind09/sturdyfishstick"
+  }
+]
