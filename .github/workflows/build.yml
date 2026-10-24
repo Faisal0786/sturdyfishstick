@@ -128,10 +128,8 @@ jobs:
           find . -name "*.jar" ! -name "gradle-wrapper.jar" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
           if [ -f "build/plugins.json" ]; then
             cp build/plugins.json $RUNNER_TEMP/build_artifacts/
-            cp build/plugins.json $RUNNER_TEMP/build_artifacts/repo.json
           elif [ -f "plugins.json" ]; then
             cp plugins.json $RUNNER_TEMP/build_artifacts/
-            cp plugins.json $RUNNER_TEMP/build_artifacts/repo.json
           fi
           if [ -f "repo.json" ]; then
             cp repo.json $RUNNER_TEMP/build_artifacts/
@@ -141,7 +139,7 @@ jobs:
       - name: Upload Build Artifacts (Zip)
         uses: actions/upload-artifact@v4
         with:
-          name: allanime-plugins
+          name: sturdyfishstick-plugins
           path: ${{ runner.temp }}/build_artifacts/*
           retention-days: 14
 
@@ -156,6 +154,6 @@ jobs:
           if git diff-index --quiet HEAD --; then
             echo "No changes to commit."
           else
-            git commit -m "Automated Allanime build: ${{ github.sha }}"
+            git commit -m "Automated sturdyfishstick build: ${{ github.sha }}"
             git push origin builds --force
           fi
