@@ -13,7 +13,7 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 class AnimeDekhoProvider : MainAPI() {
-    override var mainUrl = "https://animedekho.app"
+    override var mainUrl = "https://animedekho.cam"
     override var name = "AnimeDekho"
     override val hasMainPage = true
     override var lang = "hi"
@@ -35,12 +35,7 @@ class AnimeDekhoProvider : MainAPI() {
         "$mainUrl/category/fantasy/page/" to "Fantasy",
         "$mainUrl/category/drama/page/" to "Drama",
         "$mainUrl/category/animation/page/" to "Animation",
-        "$mainUrl/category/hindi-dub/page/" to "Hindi Dubbed",
-        "$mainUrl/category/tamil/page/" to "Tamil",
-        "$mainUrl/category/telugu/page/" to "Telugu",
-        "$mainUrl/category/crunchyroll/page/" to "Crunchyroll",
-        "$mainUrl/category/cartoon/page/" to "Cartoons"
-    )
+    ) 
 
     override suspend fun getMainPage(
         page: Int,
