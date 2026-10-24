@@ -1,4 +1,4 @@
-name: Build
+Name: Build
 
 # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency
 concurrency:
@@ -56,7 +56,6 @@ jobs:
         run: |
           PROP="$GITHUB_WORKSPACE/src/gradle.properties"
           rm -f $GITHUB_WORKSPACE/src/gradle/gradle-daemon-jvm.properties
-          # dosya newline ile bitmiyorsa once newline ekle (yoksa satirlar yapisir: 'noneorg.gradle...')
           if [ -n "$(tail -c 1 "$PROP")" ]; then
             echo "" >> "$PROP"
           fi
@@ -82,7 +81,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/src
           chmod +x gradlew
-          ./gradlew make makePluginsJson
+          ./gradlew makePlugins makePluginsJson --stacktrace || ./gradlew makePlugins --stacktrace
           cp **/build/*.cs3 $GITHUB_WORKSPACE/builds || true
           cp build/plugins.json $GITHUB_WORKSPACE/builds || true
 
