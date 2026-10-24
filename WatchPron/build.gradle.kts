@@ -1,7 +1,7 @@
 version = 8
 
 cloudstream {
-    authors     = listOf("kraptor")
+    authors     = listOf("sturdyfishstick")
     language    = "en"
     description = "High quality family porn from all over the world especially from manyvids, onlyfans, missax,tabooheat,adulttime and many more. Enjoy MILFs and stepmother with big tits and a lot of mommy roleplay action."
     status  = 1 // will be 3 if unspecified
