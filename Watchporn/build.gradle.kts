@@ -1,10 +1,16 @@
-version = 7
+version = 1
 
 cloudstream {
-    authors     = listOf("sturdyfishstick")
-    language    = "en"
-    description = "High quality family porn from all over the world especially from manyvids, onlyfans, missax,tabooheat,adulttime and many more. Enjoy MILFs and stepmother with big tits and a lot of mommy roleplay action."
-    status  = 1 // will be 3 if unspecified
-    tvTypes = listOf("NSFW")
-    iconUrl = "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://watchporn.to/&size=32"
+    description = "WatchPorn - Watch Porn & Multi-Audio Anime & Movies with original high speed servers"
+    authors = listOf("error-898-15")
+    status = 1
+    tvTypes = listOf("Anime", "Movie", "Cartoon")
+    language = "hi"
+    iconUrl = "https://watchporn.to/wp-content/uploads/2023/02/cropped-favicon-270x270.png"
+}
+
+android {
+    defaultConfig {
+        minSdk = 21
+    }
 }
