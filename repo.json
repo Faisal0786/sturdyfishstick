@@ -1,0 +1,10 @@
+{
+  "name": "Sturdy Fishstick Extensions",
+  "description": "AnimeDekho & Custom Cloudstream Plugins",
+  "manifestVersion": 1,
+  "repositoryUrl": "https://github.com/techmind09/sturdyfishstick",
+  "iconUrl": "https://animedekho.app/wp-content/uploads/2023/02/cropped-favicon-270x270.png",
+  "pluginLists": [
+    "https://raw.githubusercontent.com/techmind09/sturdyfishstick/builds/plugins.json"
+  ]
+}
