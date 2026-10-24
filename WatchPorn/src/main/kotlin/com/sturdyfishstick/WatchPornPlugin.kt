@@ -1,4 +1,4 @@
-package com.sturdyfishstick.watchporn
+package com.sturdyfishstick
 
 import android.content.Context
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
