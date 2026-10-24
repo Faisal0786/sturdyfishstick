@@ -5,6 +5,16 @@ import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
+import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
+import com.lagradost.cloudstream3.plugins.Plugin
+import android.content.Context
+
+@CloudstreamPlugin
+class WatchPornPlugin : Plugin() {
+    override fun load(context: Context) {
+        registerMainAPI(WatchPorn())
+    }
+}
 
 class WatchPorn : MainAPI() {
     override var mainUrl = "https://watchporn.to"
@@ -124,9 +134,9 @@ class WatchPorn : MainAPI() {
         val parts = durationText?.split(":")?.mapNotNull { it.toIntOrNull() }
         val totalMinutes = when (parts?.size) {
             3 -> (parts[0] * 60) + parts[1]
-            2 -> parts,
+            2 -> parts[0]
             else -> null
-        } as? Int
+        }
 
         val recommendations = document.select("div.related-videos div.wp-card").mapNotNull {
             it.toMainPageResult()
@@ -154,13 +164,12 @@ class WatchPorn : MainAPI() {
     ): Boolean {
         val pageHtml = app.get(data).text
         
-        // Yahan sirf Hindi subtitles ko filter karke pass kiya ja raha hai
         val filteredSubCallback: (SubtitleFile) -> Unit = { sub ->
             if (sub.lang.equals("hi", ignoreCase = true) || sub.lang.contains("hindi", ignoreCase = true)) {
                 subtitleCallback.invoke(sub)
             }
         }
 
-        return KtPlayerExtractor.getLinks(name, mainUrl, data, pageHtml, callback = callback, subtitleCallback = filteredSubCallback)
+        return KtPlayerExtractor.getLinks(name, mainUrl, data, pageHtml, subtitleCallback = filteredSubCallback, callback = callback)
     }
 }
