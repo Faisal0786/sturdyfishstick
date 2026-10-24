@@ -35,25 +35,25 @@ subprojects {
     apply(plugin = "com.lagradost.cloudstream3.gradle")
 
     cloudstream {
-        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/SaurabhKaperwan/CSX")
-        authors = listOf("megix")
+        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/techmind09/sturdy-fishstick")
+        authors = listOf("techmind09")
     }
 
     android {
-        namespace = "com.megix"
+        namespace = "com.sturdyfishstick.animedekho"
         compileSdk = 36
         defaultConfig {
             minSdk = 21
         }
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
     }
 
     tasks.withType<KotlinJvmCompile>().configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
+            jvmTarget.set(JvmTarget.JVM_17)
             freeCompilerArgs.addAll(
                 listOf(
                     "-Xno-call-assertions",
