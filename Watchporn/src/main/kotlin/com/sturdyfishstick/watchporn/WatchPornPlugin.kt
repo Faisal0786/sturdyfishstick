@@ -7,6 +7,6 @@ import android.content.Context
 @CloudstreamPlugin
 class WatchPornPlugin : Plugin() {
     override fun load(context: Context) {
-        registerMainAPI(WatchPornProvider())
+        registerMainAPI(WatchPorn())
     }
 }
