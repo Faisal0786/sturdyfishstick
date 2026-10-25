@@ -20,3 +20,5 @@ dependencyResolutionManagement {
 rootProject.name = "sturdyfishstick"
 
 include(":Watchporn")
+
+include(":Brazzpw")
