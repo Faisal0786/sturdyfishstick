@@ -1,4 +1,4 @@
-package com.sturdyfishstick.brazzpw
+Package com.sturdyfishstick.brazzpw
 
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
@@ -17,31 +17,31 @@ class BrazzPW : MainAPI() {
     override val instantLinkLoading  = true
 
     override val mainPage = mainPageOf(
-        "$mainUrl/a-z/"                        to "A to Z",
-        "$mainUrl/baby-got-boobs/"             to "Baby got boobs",
-        "$mainUrl/videos/sortby/beingwatched/" to "Being Watched",
-        "$mainUrl/big-butts-like-it-big/"      to "Big butts like it big",
-        "$mainUrl/big-tits-at-school/"         to "Big tits at school",
-        "$mainUrl/big-tits-at-work/"           to "Big tits at work",
-        "$mainUrl/big-tits-in-sports/"         to "Big tits in sports",
-        "$mainUrl/big-tits-in-uniform/"        to "Big tits in uniform",
-        "$mainUrl/big-wet-butts/"              to "Big wet butts",
-        "$mainUrl/brazzers-exxtra/"            to "Brazzers Exxtra",
-        "$mainUrl/cfnm/"                       to "Cfnm",
-        "$mainUrl/day-with-pornstar/"          to "Day with pornstar",
-        "$mainUrl/dirty-masseur/"              to "Dirty masseur",
-        "$mainUrl/doctor-adventures/"          to "Doctor Adventures",
-        "$mainUrl/hot-and-mean/"               to "Hot and mean",
-        "$mainUrl/milfs-like-it-big/"          to "Milfs like it big",
-        "$mainUrl/mom-in-control/"             to "Mom in control",
-        "$mainUrl/mommy-got-boobs/"            to "Mommy got boobs",
-        "$mainUrl/videos/sortby/views/"        to "Most Viewed",
-        "$mainUrl/videos/"                     to "Newest Videos",
-        "$mainUrl/pornstar-like-it-big/"       to "Pornstar like it big",
-        "$mainUrl/real-wife-stories/"          to "Real wife Stories",
-        "$mainUrl/teen-like-it-big/"           to "Teen like it big",
-        "$mainUrl/videos/sortby/rating/"       to "Top Rated",
-        "$mainUrl/zz-series/"                  to "Zz Series"
+        "$mainUrl/videos/"                       to "Newest Videos",
+        "$mainUrl/videos/sortby/beingwatched/"   to "Being Watched",
+        "$mainUrl/videos/sortby/rating/"         to "Top Rated",
+        "$mainUrl/videos/sortby/views/"          to "Most Viewed",
+        "$mainUrl/categories/primalfetish/"      to "PrimalFetish",
+        "$mainUrl/categories/baby-got-boobs/"    to "Baby got boobs",
+        "$mainUrl/categories/big-butts-like-it-big/" to "Big butts like it big",
+        "$mainUrl/categories/big-tits-at-school/" to "Big tits at school",
+        "$mainUrl/categories/big-tits-at-work/"   to "Big tits at work",
+        "$mainUrl/categories/big-tits-in-sports/" to "Big tits in sports",
+        "$mainUrl/categories/big-tits-in-uniform/" to "Big tits in uniform",
+        "$mainUrl/categories/big-wet-butts/"     to "Big wet butts",
+        "$mainUrl/categories/brazzers-exxtra/"   to "Brazzers Exxtra",
+        "$mainUrl/categories/cfnm/"              to "Cfnm",
+        "$mainUrl/categories/day-with-pornstar/" to "Day with pornstar",
+        "$mainUrl/categories/dirty-masseur/"     to "Dirty masseur",
+        "$mainUrl/categories/doctor-adventures/" to "Doctor Adventures",
+        "$mainUrl/categories/hot-and-mean/"      to "Hot and mean",
+        "$mainUrl/categories/milfs-like-it-big/" to "Milfs like it big",
+        "$mainUrl/categories/mom-in-control/"    to "Mom in control",
+        "$mainUrl/categories/mommy-got-boobs/"   to "Mommy got boobs",
+        "$mainUrl/categories/pornstar-like-it-big/" to "Pornstar like it big",
+        "$mainUrl/categories/real-wife-stories/" to "Real wife Stories",
+        "$mainUrl/categories/teen-like-it-big/"  to "Teen like it big",
+        "$mainUrl/categories/zz-series/"         to "Zz Series"
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
