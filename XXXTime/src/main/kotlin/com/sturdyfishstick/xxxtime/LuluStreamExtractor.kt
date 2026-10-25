@@ -1,4 +1,4 @@
-package com.sturdyfishstick
+package com.sturdyfishstick.xxxtime
 
 import android.util.Log
 import com.lagradost.cloudstream3.*
