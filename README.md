@@ -12,7 +12,7 @@ Specially curated for the Desi audience! 🍿
 
 ## 🌟 Introduction
 
-Welcome to the **Desi Extensions Repository**! This repository provides a collection of the best and most reliable extensions for your streaming app, focusing heavily on Hindi dubbed content, Bollywood, Anime, and Multi-language media. 
+Welcome to the **Sturdyfishstick Extensions Repository**! This repository provides a collection of the best and most reliable extensions for your streaming app, focusing heavily Sensitive Contents language media. 
 
 Our flagship provider, **Watch Movies**, is built to give you a seamless streaming experience without the hassle of dead links.
 
