@@ -10,10 +10,9 @@ class WatchPorn : MainAPI() {
     override var mainUrl = "https://watchporn.to"
     override var name = "WatchPorn"
     override val hasMainPage = true
-    override var lang = "en"
+    override var lang = "hi" // Hindi subtitle/language category set kar di gayi hai
     override val hasQuickSearch = false
     override val supportedTypes = setOf(TvType.NSFW)
-
 
     override val mainPage = mainPageOf(
         "${mainUrl}/top-rated/" to "Top Rated",
@@ -63,6 +62,29 @@ class WatchPorn : MainAPI() {
         "${mainUrl}/categories/analvids/" to "AnalVids",
         "${mainUrl}/categories/pornworld/" to "PornWorld",
         "${mainUrl}/categories/brattysis/" to "BrattySis",
+        "${mainUrl}/categories/householdfantasy/" to "HouseholdFantasy",
+        "${mainUrl}/categories/momcomesfirst/" to "MomComesFirst",
+        "${mainUrl}/categories/wifey/" to "Wifey",
+        "${mainUrl}/categories/momswap/" to "MomSwap",
+        "${mainUrl}/categories/touchmywife/" to "TouchMyWife",
+        "${mainUrl}/categories/sexmex/" to "SexMex",
+        "${mainUrl}/categories/fillupmymom/" to "FillUpMyMom",
+        "${mainUrl}/categories/freeze/" to "Freeze",
+        "${mainUrl}/categories/bigcockbully/" to "BigCockBully",
+        "${mainUrl}/categories/milfy/" to "Milfy",
+        "${mainUrl}/categories/dickdrainers/" to "DickDrainers",
+        "${mainUrl}/categories/shoplyfter/" to "Shoplyfter",
+        "${mainUrl}/categories/myfriendshotmom/" to "MyFriendsHotMom",
+        "${mainUrl}/categories/digitalplayground/" to "DigitalPlayground",
+        "${mainUrl}/categories/publicagent/" to "PublicAgent",
+        "${mainUrl}/categories/interracialpass/" to "InterracialPass",
+        "${mainUrl}/categories/thundercock/" to "ThunderCock",
+        "${mainUrl}/categories/daughterswap/" to "DaughterSwap",
+        "${mainUrl}/categories/mommysboy/" to "MommysBoy",
+        "${mainUrl}/categories/milflicious/" to "Milflicious",
+        "${mainUrl}/categories/hotmilfsfuck/" to "HotMILFsFuck",
+        "${mainUrl}/categories/oopsfamily/" to "OopsFamily",
+        "${mainUrl}/categories/primalstaboosex/" to "PrimalsTabooSex"
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
