@@ -1,7 +1,7 @@
 version = 1
 
 cloudstream {
-    description = "BrazzPw - Watch Porn Movies with original high speed servers"
+    description = "BrazzPW - Watch Porn Movies with original high speed servers"
     authors = listOf("sturdyfishstick")
     status = 1
     tvTypes = listOf("Movie")
