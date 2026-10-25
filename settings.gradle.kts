@@ -21,4 +21,4 @@ rootProject.name = "sturdyfishstick"
 
 include(":Watchporn")
 
-include(":Brazzpw")
+include(":BrazzPw")
