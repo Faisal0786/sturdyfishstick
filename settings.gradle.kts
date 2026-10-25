@@ -25,4 +25,4 @@ include(":BrazzPw")
 
 include(":XmoviesForYou")
 
-include(":X2T")
+include(":x2t")
