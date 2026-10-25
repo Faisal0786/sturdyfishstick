@@ -171,13 +171,19 @@ class WatchPorn : MainAPI() {
         }
     }
 
-    override suspend fun loadLinks(
+        override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val pageHtml = app.get(data).text
-        return KtPlayerExtractor.getLinks(name, mainUrl, data, pageHtml, callback = callback)
+        return KtPlayerExtractor.getLinks(
+            sourceName = name,
+            mainUrl = mainUrl,
+            pageUrl = data,
+            pageHtml = pageHtml,
+            callback = callback
+        )
     }
-}
+    
