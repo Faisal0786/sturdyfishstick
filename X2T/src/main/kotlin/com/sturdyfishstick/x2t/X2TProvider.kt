@@ -1,4 +1,4 @@
-package com.sturdyfishstick.x2t
+package com.sturdyfishstick.xxxtime
 
 import com.lagradost.api.Log
 import org.jsoup.nodes.Element
