@@ -1,0 +1,9 @@
+{
+  "name": "Sturdy Fishstick Extensions",
+  "description": "Custom Cloudstream Plugins",
+  "manifestVersion": 1,
+  "repositoryUrl": "https://github.com/techmind09/sturdyfishstick",
+  "pluginLists": [
+    "https://raw.githubusercontent.com/techmind09/sturdyfishstick/builds/plugins.json"
+  ]
+}
