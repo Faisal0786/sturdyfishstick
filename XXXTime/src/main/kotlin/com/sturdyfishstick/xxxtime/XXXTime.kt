@@ -7,7 +7,7 @@ import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 
-    class XXXTime : MainAPI() {
+class XXXTimePlugin : MainAPI() {
     override var mainUrl = "https://xxxtime.video"
     override var name = "XXXTime"
     override val hasMainPage = true
@@ -24,9 +24,9 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
         "${mainUrl}/channels.php?ch=Brazzers" to "Brazzers",
         "${mainUrl}/channels.php?ch=Mature4k" to "Mature4k",
         "${mainUrl}/channels.php?ch=Mom4k" to "Mom4k",
+        "${mainUrl}/categories.php?c=Anal" to "Anal",
         "${mainUrl}/categories.php?c=Big+Ass" to "Big Ass",
         "${mainUrl}/categories.php?c=Redhead" to "Redhead",
-        // Models List Added
         "${mainUrl}/models.php?m=Eve Sweet" to "Eve Sweet",
         "${mainUrl}/models.php?m=Yasmina Khan" to "Yasmina Khan",
         "${mainUrl}/models.php?m=Zory Miller" to "Zory Miller",
@@ -98,9 +98,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
         return newSearchResponseList(searchAnswer, hasNext = true)
     }
 
-
     override suspend fun quickSearch(query: String): List<SearchResponse>? = search(query)
-
 
     override suspend fun load(url: String): LoadResponse? {
         Log.d(name, "Load aşaması: $url")
