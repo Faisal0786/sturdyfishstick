@@ -2,9 +2,10 @@
 
 # 🇮🇳 Sturdy Fishstick Extensions & StreamHub One Repository 🎬
 
-[Sturdy Fishstick](https://share.google/6kz35zLefYKY2TfRv)
 
-[Paste Cloudstream Repository](https://raw.githubusercontent.com/techmind09/sturdyfishstick/refs/heads/builds/repo.json)
+  [Paste Cloudstream Repository](https://raw.githubusercontent.com/techmind09/sturdyfishstick/refs/heads/builds/repo.json)
+
+  
 **The Ultimate Non-SNon-Stoption for Streaming Movies,*Desiecially curated for the Desi audience! 🍿
 
 </div>
