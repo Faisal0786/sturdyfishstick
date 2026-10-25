@@ -10,7 +10,7 @@ class WatchPorn : MainAPI() {
     override var mainUrl = "https://watchporn.to"
     override var name = "WatchPorn"
     override val hasMainPage = true
-    override var lang = "hi" // Hindi subtitle/language category set kar di gayi hai
+    override var lang = "hi"
     override val hasQuickSearch = false
     override val supportedTypes = setOf(TvType.NSFW)
 
@@ -171,19 +171,23 @@ class WatchPorn : MainAPI() {
         }
     }
 
-        override suspend fun loadLinks(
+    override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val pageHtml = app.get(data).text
+        val response = app.get(data)
+        val pageHtml = response.text
+        val cookies = response.cookies
+
         return KtPlayerExtractor.getLinks(
             sourceName = name,
             mainUrl = mainUrl,
             pageUrl = data,
             pageHtml = pageHtml,
+            cookieHeaders = cookies,
             callback = callback
         )
     }
-    
+}
