@@ -25,4 +25,4 @@ include(":BrazzPw")
 
 include(":XmoviesForYou")
 
-include(":x2t")
+include(":X2T") // Yahan 'x2t' ki jagah 'X2T' kar diya gaya hai
