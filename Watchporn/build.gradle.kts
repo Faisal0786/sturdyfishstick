@@ -1,12 +1,12 @@
 version = 1
 
 cloudstream {
-    description = "WatchPorn - Watch Porn & Multi-Audio Anime & Movies with original high speed servers"
+    description = "WatchPorn - Watch Porn Movies with original high speed servers"
     authors = listOf("error-898-15")
     status = 1
-    tvTypes = listOf("Anime", "Movie", "Cartoon")
-    language = "hi"
-    iconUrl = "https://watchporn.to/wp-content/uploads/2023/02/cropped-favicon-270x270.png"
+    tvTypes = listOf("Movie")
+    language = "en"
+    iconUrl = "https://watchporn.to/static/images/logo.svg"
 }
 
 android {
