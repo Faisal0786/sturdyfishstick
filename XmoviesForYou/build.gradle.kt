@@ -6,7 +6,7 @@ cloudstream {
     status = 1
     tvTypes = listOf("Movie")
     language = "en"
-    iconUrl = "https://xmoviescdn.online/2018/08/logo.png"
+    iconUrl = "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://xmoviesforyou.com/&size=32"
 }
 
 android {
