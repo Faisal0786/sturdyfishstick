@@ -21,7 +21,7 @@ Our flagship provider, **Watch Movies**, is built to give you a seamless streami
 ## 🔥 Flagship Provider: Sturdyfishstick
 
 **Sturdy Fishstick** is your all-in-one multilingual provider. 
-- **Author:** WatchPorn
+- **Author:** Techmind 09
 - **Version:** 1
 - **SizVersin:** 15Kb
 - **Supported Content:** Movies,
