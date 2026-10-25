@@ -2,7 +2,8 @@
 
 # 🇮🇳 SturdyFishstick Extensions & StreamHub One Repository 🎬
 
-![Extension Url](https://raw.githubusercontent.com/techmind09/sturdyfishstick/refs/heads/builds/repo.json)
+[*Paste Cloudstream Repository*]
+(*https://raw.githubusercontent.com/techmind09/sturdyfishstick/refs/heads/builds/repo.json*) 
 **The Ultimate Non-Stop Solution for Streaming Movies, TV Series, Anime, & Asian Dramas.**
 Specially curated for the Desi audience! 🍿
 
