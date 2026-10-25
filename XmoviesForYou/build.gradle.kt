@@ -1,4 +1,4 @@
-version = 1
+version = 5
 
 description = "XmoviesForYou - Watch Porn Movies with original high speed servers"
 language = "en"
@@ -7,8 +7,8 @@ cloudstream {
     authors = listOf("sturdyfishstick")
     status = 1
     tvTypes = listOf("Movie")
-    iconUrl = "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://xmoviesforyou.com/&size=3"
-}
+    iconUrl = "https://xmoviescdn.online/2018/08/logo.png"
+
 
 android {
     defaultConfig {
