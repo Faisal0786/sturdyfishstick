@@ -1,4 +1,4 @@
-package com.sturdyfishstick.xxxtime
+package com.sturdyfishstick.XXXTime
 
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
 import com.lagradost.cloudstream3.plugins.Plugin
