@@ -7,7 +7,7 @@ cloudstream {
     status      = 1
     tvTypes     = listOf("Movie")
     iconUrl     = "https://www.google.com/s2/favicons?sz=64&domain=https://xxxtime.video"
-
+}
 
 android {
     defaultConfig {
