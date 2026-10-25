@@ -1,4 +1,4 @@
-Package com.sturdyfishstick.brazzpw
+package com.sturdyfishstick.brazzpw
 
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
