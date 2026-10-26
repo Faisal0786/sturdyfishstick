@@ -67,6 +67,15 @@ class XXXTime : MainAPI() {
         "${mainUrl}/model.php?p=Savannah-Bond" to "Savannah Bond",
         "${mainUrl}/model.php?p=Melissa-Stratton" to "Melissa Stratton",
         "${mainUrl}/model.php?p=Juniper-Ren" to "Juniper Ren"
+       "${mainUrl}/model.php?p=Zory-Miller" to "Zory Miller",
+        "${mainUrl}/model.php?p=Raisa-Bellini" to "Raisa Bellini",
+        "${mainUrl}/model.php?p=Kada-Monroe" to "Kada Monroe",
+        "${mainUrl}/model.php?p=Luna-Vital" to "Luna Vital",
+        "${mainUrl}/model.php?p=Alanna-Rae" to "Alanna Rae",
+        "${mainUrl}/model.php?p=CamAzza" to "CamAzza",
+        "${mainUrl}/model.php?p=Aleksa-Slus" to "Aleksa Slus",
+        "${mainUrl}/model.php?p=LuSinna69" to "LuSinna69",
+       
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
