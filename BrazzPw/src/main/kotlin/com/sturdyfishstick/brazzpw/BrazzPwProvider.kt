@@ -16,11 +16,22 @@ class BrazzPW : MainAPI() {
     override val vpnStatus           = VPNStatus.MightBeNeeded
     override val instantLinkLoading  = true
 
-        override val mainPage = mainPageOf(
+    override val mainPage = mainPageOf(
         "$mainUrl/videos/newest/"                    to "Newest Videos",
         "$mainUrl/videos/sortby/beingwatched/"       to "Being Watched",
         "$mainUrl/videos/sortby/rating/"             to "Top Rated",
         "$mainUrl/videos/sortby/views/"              to "Most Viewed",
+        "$mainUrl/videos/tags/112/black/"            to "Black",
+        "$mainUrl/videos/tags/448/anal/"             to "Anal",
+        "$mainUrl/videos/tags/79/milf/"              to "Milf",
+        "$mainUrl/videos/tags/49/big-ass/"           to "Big Ass",
+        "$mainUrl/videos/tags/220/squirt/"           to "Squirt",
+        "$mainUrl/videos/tags/92/bbw/"               to "BBW",
+        "$mainUrl/videos/tags/181/stepmom/"          to "Stepmom",
+        "$mainUrl/videos/tags/211/massage/"          to "Massage",
+        "$mainUrl/videos/tags/511/parody/"           to "Parody",
+        "$mainUrl/videos/tags/192/yoga/"             to "Yoga",
+        "$mainUrl/videos/tags/473/double-penetration/" to "Double Penetration",
         "$mainUrl/videos/site/65/big-wet-butts/"     to "Big Wet Butts",
         "$mainUrl/videos/site/66/baby-got-boobs/"    to "Baby Got Boobs",
         "$mainUrl/videos/site/62/doctor-adventures/" to "Doctor Adventures",
@@ -42,7 +53,6 @@ class BrazzPW : MainAPI() {
         "$mainUrl/videos/site/78/milfs-like-it-big/" to "Milfs like it big",
         "$mainUrl/videos/site/77/pornstar-like-it-big/" to "Pornstar like it big"
     )
-
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val pageUrl  = if (page <= 1) request.data else "${request.data}page/$page/"
