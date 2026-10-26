@@ -87,17 +87,42 @@ class UncutMaza : MainAPI() {
     override suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean {
         val document = app.get(data).document
 
-        document.select("div.video-player").map { res ->
-            callback.invoke(
-                newExtractorLink(
-                    source = this.name,
-                    name = this.name,
-                    url = fixUrl(res.selectFirst("meta[itemprop=contentURL]")?.attr("content")?.trim().toString())
-                ) {
-                    this.referer = data
-                    this.quality = Qualities.Unknown.value
+        // 1. Direct video/source tags check karein
+        document.select("video, source").forEach { source ->
+            val videoUrl = source.attr("src") ?: source.attr("data-src")
+            if (!videoUrl.isNullOrEmpty()) {
+                callback.invoke(
+                    newExtractorLink(
+                        source = this.name,
+                        name = this.name,
+                        url = fixUrl(videoUrl)
+                    ) {
+                        this.referer = mainUrl
+                        this.quality = Qualities.Unknown.value
+                    }
+                )
+            }
+        }
+
+        // 2. Meta tags ya custom player script data check karein
+        document.select("div.video-player, div.player-container, div.entry-content").forEach { element ->
+            val contentUrl = element.selectFirst("meta[itemprop=contentURL]")?.attr("content")
+                ?: element.selectFirst("iframe")?.attr("src")
+
+            if (!contentUrl.isNullOrEmpty()) {
+                val fixedUrl = fixUrl(contentUrl)
+                if (fixedUrl.contains("http")) {
+                    loadExtractor(fixedUrl, data, subtitleCallback, callback)
                 }
-            )
+            }
+        }
+
+        // 3. Page ke sabhi iframes ko scan karein
+        document.select("iframe").forEach { iframe ->
+            val src = iframe.attr("src")
+            if (src.isNotEmpty() && !src.contains("ads")) {
+                loadExtractor(fixUrl(src), data, subtitleCallback, callback)
+            }
         }
 
         return true
