@@ -15,12 +15,36 @@ class K8Porner : MainAPI() {
     override val vpnStatus = VPNStatus.MightBeNeeded
 
     override val mainPage = mainPageOf(
-        "" to "Latest",
-        "category/trending/" to "Trending",
-        "category/popular/" to "Most Popular",
-        "category/vr-porn/" to "VR Porn",
-        "category/anal/" to "Anal",
-        "category/milf/" to "MILF"
+        "studio/1pondo/" to "1Pondo",
+        "studio/21naturals/" to "21Naturals",
+        "studio/21sextury/" to "21Sextury",
+        "studio/50plusmilfs/" to "50PlusMilfs",
+        "studio/5kporn/" to "5KPorn",
+        "studio/abbywinters/" to "AbbyWinters",
+        "studio/abc/" to "ABC",
+        "studio/ad4x/" to "AD4X",
+        "studio/adriana-chechik/" to "Adriana Chechik",
+        "studio/adultprime/" to "AdultPrime",
+        "studio/adulttime/" to "AdultTime",
+        "studio/alexis-tae/" to "Alexis Tae",
+        "studio/alexlegend/" to "AlexLegend",
+        "studio/allblackx/" to "AllBlackX",
+        "studio/alt/" to "Alt",
+        "studio/alterotic/" to "Alterotic",
+        "studio/analized/" to "Analized",
+        "studio/analonly/" to "AnalOnly",
+        "studio/analvids/" to "AnalVids",
+        "studio/anatomikmedia/" to "AnatomikMedia",
+        "studio/angel-wicky/" to "Angel Wicky",
+        "studio/angela-white/" to "Angela White",
+        "studio/anilos/" to "Anilos",
+        "studio/anna-claire-clouds/" to "Anna Claire Clouds",
+        "studio/ara/" to "ARA",
+        "studio/archangel/" to "ArchAngel",
+        "studio/ark/" to "ARK",
+        "studio/arousins/" to "Arousins",
+        "studio/asa-akira/" to "Asa Akira",
+        "studio/asia/" to "Asia",
     )
 
     private fun toResult(post: Element): SearchResponse? {
