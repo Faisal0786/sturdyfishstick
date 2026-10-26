@@ -7,7 +7,7 @@ import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 
-class LuluStreamExtractor : MainAPI() {
+class XXXTime : MainAPI() {
     override var mainUrl = "https://xxxtime.video"
     override var name = "XXXTime"
     override val hasMainPage = true
