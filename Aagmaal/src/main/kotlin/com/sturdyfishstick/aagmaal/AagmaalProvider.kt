@@ -1,6 +1,5 @@
 package com.sturdyfishstick.aagmaal
 
-import com.google.gson.JsonParser
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
@@ -16,11 +15,14 @@ class Aagmaal : MainAPI() {
     override val vpnStatus = VPNStatus.MightBeNeeded
 
     override val mainPage = mainPageOf(
+        "" to "Latest",
+        "category/ullu-originals-web-series" to "Ullu",
+        "tag/moodx" to "MoodX",
         "tag/hunters" to "Hunters",
         "tag/primeplay" to "PrimePlay",
         "tag/kooku" to "Kooku",
         "tag/besharams" to "Besharams",
-        // Added entries:
+        "tag/neonx" to "NeonX",
         "category/aagmaal" to "AAGmaal",
         "category/best-videos" to "Best videos",
         "category/bindas-times" to "Bindas Times",
@@ -83,6 +85,8 @@ class Aagmaal : MainAPI() {
         }
     }
 
+    data class StreamResponse(val streaming_url: String?)
+
     private suspend fun extractVidhost(
         embedUrl: String,
         subtitleCallback: (SubtitleFile) -> Unit,
@@ -91,6 +95,8 @@ class Aagmaal : MainAPI() {
         return try {
             val host = embedUrl.substringAfter("//").substringBefore("/")
             val filecode = embedUrl.trimEnd('/').substringAfterLast('/')
+            
+            // Using Cloudstream's native parsedSafe instead of Gson
             val response = app.post(
                 "https://$host/api/stream",
                 json = mapOf(
@@ -99,10 +105,9 @@ class Aagmaal : MainAPI() {
                     "codecs" to emptyList<String>()
                 ),
                 referer = embedUrl
-            ).text
-            val stream = JsonParser.parseString(response).asJsonObject
-                .get("streaming_url")?.asString
+            ).parsedSafe<StreamResponse>()
 
+            val stream = response?.streaming_url
             if (stream.isNullOrEmpty()) return false
 
             callback.invoke(
