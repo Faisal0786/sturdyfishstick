@@ -30,24 +30,28 @@ class TellyHD : MainAPI() {
     @SuppressLint("NewApi")
     override val mainPage = mainPageOf(
         "release/${Year.now().value}" to "Latest",
-        "genre/5kporn" to "5KPorn",
-        "genre/11upmovies" to "11UpMovies",
-        "genre/18plus" to "18+",
+        "genre/18+" to "18+",
+        "genre/9redmovie" to "9redmovie",
+        "genre/Addatv" to "Addatv",
         "genre/9redmovie" to "9redmovie",
         "genre/aahasflix" to "AahaFlix",
         "genre/addatv" to "Addatv",
         "genre/altbalaji" to "Alt Balaji",
-        "genre/usa" to "USA",
+        "genre/atrangii" to "Atrangii",
         "genre/jav" to "JAV",
         "genre/bindastimes" to "Bindastimes",
-        "genre/hunters" to "Hunters",
-        "genre/neonx" to "Neonx",
-        "genre/philippine" to "Philippine",
-        "genre/primeplay" to "Primeplay",
-        "genre/primeshots" to "Primeshots",
-        "genre/rabbit" to "Rabbit",
-        "genre/vivamax" to "Vivamax",
-    )
+        "genre/brazzers" to "Brazzers",
+        "genre/cineprime" to "CinePrime",
+        "genre/digital playground" to "Digital Playground",
+        "genre/english" to "English",
+        "genre/france" to "France",
+        "genre/goddesmahi" to "GoddesMahi",
+        "genre/hindi" to "Hindi",
+        "genre/marcdorcel" to "Marc Dorcel"
+        "genre/movies" to "Movies"
+        "genre/neonx" to "NeonX"
+        "genre/niksindian" to "Niksindian"
+     )
 
     override suspend fun getMainPage(
         page: Int,
