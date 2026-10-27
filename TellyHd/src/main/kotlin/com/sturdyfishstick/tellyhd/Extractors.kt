@@ -10,29 +10,10 @@ import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.getQualityFromName
 import com.lagradost.cloudstream3.utils.newExtractorLink
 
-class Vidsp : VidhideExtractor() {
-    override var mainUrl = "https://vidsp.lol"
-}
-
-class VidHideplus : VidhideExtractor() {
-    override var mainUrl = "https://vidhideplus.com"
-}
-
-class VidHidedht : VidhideExtractor() {
-    override var mainUrl = "https://dhtpre.com"
-}
-
-class Vidhidehub : VidhideExtractor() {
-    override var mainUrl = "https://vidhidehub.com"
-}
-
-class Vidhidetoul : VidhideExtractor() {
-    override var mainUrl = "https://toul.hair"
-}
-
-class Xtapes : VidhideExtractor() {
-    override var mainUrl = "https://xtapes.porn"
-    override var name = "Xtapes"
+// --- Lulustream Mirrors ---
+class Lulustream : LuluStream() {
+    override val name = "Lulustream"
+    override val mainUrl = "https://lulustream.com"
 }
 
 class Luluvid : LuluStream() {
@@ -40,11 +21,48 @@ class Luluvid : LuluStream() {
     override val mainUrl = "https://luluvid.com"
 }
 
+class Luluvdo : LuluStream() {
+    override val name = "Lulustream"
+    override val mainUrl = "https://luluvdo.com"
+}
+
+class Lulust : LuluStream() {
+    override val name = "Lulustream"
+    override val mainUrl = "https://lulust.com"
+}
+
+class CdnTelly : LuluStream() {
+    override val name = "Lulustream"
+    override val mainUrl = "https://cdntelly.sbs"
+}
+
+// --- Ultra Stream / Vidhide Mirrors ---
 class Ultrastream : VidhideExtractor() {
     override var mainUrl = "https://ultrastream.audio"
     override var name = "Ultra Stream"
 }
 
+class Bysezoxexe : VidhideExtractor() {
+    override var mainUrl = "https://bysezoxexe.com"
+    override var name = "Ultra Stream"
+}
+
+class VidaraTo : VidhideExtractor() {
+    override var mainUrl = "https://vidara.to"
+    override var name = "Ultra Stream"
+}
+
+class Vidhideplus : VidhideExtractor() {
+    override var mainUrl = "https://vidhideplus.com"
+    override var name = "Ultra Stream"
+}
+
+class Vidhidehub : VidhideExtractor() {
+    override var mainUrl = "https://vidhidehub.com"
+    override var name = "Ultra Stream"
+}
+
+// --- Doodstream Mirrors ---
 open class Ds2play : ExtractorApi() {
     override var name = "DoodStream"
     override var mainUrl = "https://ds2play.com"
@@ -77,30 +95,36 @@ open class Ds2play : ExtractorApi() {
     }
 }
 
-open class Bigwarp : ExtractorApi() {
-    override val name = "Bigwarp"
-    override val mainUrl = "https://bigwarp.io"
+class DoodCom : Ds2play() { override var mainUrl = "https://doodstream.com" }
+class DoodTo : Ds2play() { override var mainUrl = "https://dood.to" }
+class DoodWatch : Ds2play() { override var mainUrl = "https://dood.watch" }
+class DoodLa : Ds2play() { override var mainUrl = "https://dood.la" }
+class DoodPm : Ds2play() { override var mainUrl = "https://dood.pm" }
+class DoodSh : Ds2play() { override var mainUrl = "https://dood.sh" }
+class DoodWs : Ds2play() { override var mainUrl = "https://dood.ws" }
+class DoodOne : Ds2play() { override var mainUrl = "https://dood.one" }
+class DoodSo : Ds2play() { override var mainUrl = "https://dood.so" }
+class DoodWork : Ds2play() { override var mainUrl = "https://dood.work" }
+
+// --- Pixeldrain ---
+open class Pixeldrain : ExtractorApi() {
+    override val name = "Pixeldrain"
+    override val mainUrl = "https://pixeldrain.com"
     override val requiresReferer = false
 
-    override suspend fun getUrl(
-        url: String,
-        referer: String?,
-    ): List<ExtractorLink>? {
-        val response = app.get(url).document
-        val script = response.selectFirst("script:containsData(sources)")?.data().toString()
-        Regex("sources:\\s*\\[\\s*\\{\\s*file:\\s*\"(.*?)\"").find(script)?.groupValues?.get(1)?.let { link ->
-            return listOf(
-                newExtractorLink(
-                    source = name,
-                    name = name,
-                    url = link,
-                    INFER_TYPE
-                ) {
-                    this.referer = referer ?: "$mainUrl/"
-                    this.quality = Qualities.P1080.value
-                }
-            )
-        }
-        return null
+    override suspend fun getUrl(url: String, referer: String?): List<ExtractorLink>? {
+        val fileId = url.substringAfterLast("/")
+        val directUrl = "https://pixeldrain.com/api/file/$fileId"
+        return listOf(
+            newExtractorLink(
+                source = name,
+                name = name,
+                url = directUrl,
+                INFER_TYPE
+            ) {
+                this.referer = "$mainUrl/"
+                this.quality = Qualities.P1080.value
+            }
+        )
     }
 }
