@@ -42,12 +42,25 @@ class UncutMaza : MainAPI() {
     }
 
     private fun Element.toSearchResult(): SearchResponse {
-        val title     = fixTitle(this.select("a").attr("title"))
-        val href      = fixUrl(this.select("a").attr("href"))
-        val posterUrl = fixUrlNull(this.select("a > div.post-thumbnail>div.post-thumbnail-container>img").attr("data-src"))
+        val title = fixTitle(this.select("a").attr("title"))
+        val href = fixUrl(this.select("a").attr("href"))
+        
+        val img = this.selectFirst("img")
+        var posterUrl = img?.attr("data-src")
+            ?: img?.attr("data-lazy-src")
+            ?: img?.attr("data-original")
+            ?: img?.attr("src")
+
+        if (posterUrl.isNullOrEmpty()) {
+            val thumbDiv = this.selectFirst("div.post-thumbnail, div.post-thumbnail-container, div.thumb")
+            val style = thumbDiv?.attr("style") ?: img?.attr("style") ?: ""
+            if (style.contains("url(")) {
+                posterUrl = style.substringAfter("url(").substringBefore(")").trim('\'', '"')
+            }
+        }
 
         return newMovieSearchResponse(title, href, TvType.NSFW) {
-            this.posterUrl = posterUrl
+            this.posterUrl = fixUrlNull(posterUrl)
         }
     }
 
@@ -87,7 +100,6 @@ class UncutMaza : MainAPI() {
     override suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean {
         val document = app.get(data).document
 
-        // 1. Direct video/source tags check karein
         document.select("video, source").forEach { source ->
             val videoUrl = source.attr("src") ?: source.attr("data-src")
             if (!videoUrl.isNullOrEmpty()) {
@@ -104,7 +116,6 @@ class UncutMaza : MainAPI() {
             }
         }
 
-        // 2. Meta tags ya custom player script data check karein
         document.select("div.video-player, div.player-container, div.entry-content").forEach { element ->
             val contentUrl = element.selectFirst("meta[itemprop=contentURL]")?.attr("content")
                 ?: element.selectFirst("iframe")?.attr("src")
@@ -117,7 +128,6 @@ class UncutMaza : MainAPI() {
             }
         }
 
-        // 3. Page ke sabhi iframes ko scan karein
         document.select("iframe").forEach { iframe ->
             val src = iframe.attr("src")
             if (src.isNotEmpty() && !src.contains("ads")) {
