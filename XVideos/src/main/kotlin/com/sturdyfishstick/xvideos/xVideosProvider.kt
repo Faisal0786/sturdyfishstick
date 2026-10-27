@@ -6,7 +6,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
 
-class xVideos : MainAPI() {
+class xVideos : byayzen() {
     override var mainUrl = "https://www.xvideos.com"
     override var name = "xVideos"
     override val hasMainPage = true
