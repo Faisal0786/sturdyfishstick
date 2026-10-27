@@ -72,8 +72,14 @@ class xHamster : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
+        val targetUrl = if (request.data.contains("/search/")) {
+            "${request.data}?page=$page&x_platform_switch=desktop&geo=us"
+        } else {
+            "${request.data}/$page?geo=us"
+        }
+
         val document = app.get(
-            "${request.data}/$page?geo=us",
+            targetUrl,
             cookies = mapOf("video_titles_translation" to "0")
         ).document
 
@@ -90,12 +96,12 @@ class xHamster : MainAPI() {
                 list               = home,
                 isHorizontalImages = true
             ),
-            hasNext = true
+            hasNext = home.isNotEmpty()
         )
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
-        val titleElement = this.selectFirst("a.video-thumb-info__name") ?: return null
+        val titleElement = this.selectFirst("a.video-thumb-info__name") ?: this.selectFirst("a.video-thumb__name") ?: return null
         val title        = titleElement.attr("title").ifEmpty { titleElement.text().trim() }.ifEmpty { return null }
         val href         = fixUrl(titleElement.attr("href"))
 
@@ -122,10 +128,10 @@ class xHamster : MainAPI() {
                 cookies = mapOf("video_titles_translation" to "0")
             ).document
 
-        val aramaCevap = document.select("div.thumb-list div.thumb-list__item")
+        val aramaCevap = document.select("div.thumb-list div.thumb-list__item, div.video-thumb")
             .mapNotNull { it.toSearchResult() }
 
-        return newSearchResponseList(aramaCevap, hasNext = true)
+        return newSearchResponseList(aramaCevap, hasNext = aramaCevap.isNotEmpty())
     }
 
     override suspend fun load(url: String): LoadResponse {
