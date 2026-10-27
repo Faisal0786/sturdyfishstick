@@ -7,16 +7,13 @@ import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.loadExtractor
-import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.time.Year
 
 class TellyHD : MainAPI() {
 
-    override var mainUrl: String = runBlocking {
-        TellyHDPlugin.getDomains()?.Tellyhd ?: "https://tellyhd.st"
-    }
+    override var mainUrl: String = "https://tellyhd.st"
     override var name = "TellyHD"
     override val hasMainPage = true
     override var lang = "hi"
@@ -24,6 +21,7 @@ class TellyHD : MainAPI() {
     override val vpnStatus = VPNStatus.MightBeNeeded
     private val directUrl = ""
 
+    // Common headers to prevent timeout and blocking
     private val headers = mapOf(
         "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
@@ -118,8 +116,8 @@ class TellyHD : MainAPI() {
         val description = document.select("div.wp-content > p").text().trim()
         
         val episodes = document.select("ul#playeroptionsul > li").mapNotNull { li ->
-            val name = li.selectFirst("span.title")?.text()?.trim()
-                ?: li.select("span").text().trim()
+            val name = li.selectFirst("span.title")?.text()?.trim() 
+                ?: li.select("span").text().trim() 
                 ?: li.text().trim()
             
             val type = li.attr("data-type")
@@ -127,6 +125,7 @@ class TellyHD : MainAPI() {
             val nume = li.attr("data-nume")
             
             if (post.isNullOrEmpty() || nume.isNullOrEmpty()) return@mapNotNull null
+            // Trailers ko chhor kar baaki sabhi servers (jaise DoodStream, Lulustream, etc.) ko allow karein
             if (name.contains("trailer", ignoreCase = true)) return@mapNotNull null
             
             val json = LinkData(type, post, nume).toJson()
@@ -170,13 +169,14 @@ class TellyHD : MainAPI() {
             headers = headers
         ).text
 
+        // Safe extraction of iframe or embed URL from AJAX response
         val iframeUrl = Jsoup.parse(res).select("iframe").attr("src").ifEmpty {
             Jsoup.parse(res).select("iframe").attr("data-src")
         }.ifEmpty {
             Regex("https?://[^\\s\"']+").find(res)?.value ?: ""
         }
 
-        if (iframeUrl.isNotEmpty()) {
+        if (iframeUrl.isNotEmpty() && !iframeUrl.contains("youtube")) {
             val fixedUrl = if (iframeUrl.startsWith("//")) "https:$iframeUrl" else iframeUrl
             loadExtractor(fixedUrl, "$mainUrl/", subtitleCallback, callback)
         }
