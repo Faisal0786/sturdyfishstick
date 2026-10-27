@@ -10,21 +10,33 @@ class TellyHDPlugin : Plugin() {
     override fun load(context: Context) {
         registerMainAPI(TellyHD())
         registerExtractorAPI(Ds2play())
-        registerExtractorAPI(Vidsp())
-        registerExtractorAPI(VidHideplus())
-        registerExtractorAPI(VidHidedht())
-        registerExtractorAPI(Vidhidehub())
-        registerExtractorAPI(Bigwarp())
-        registerExtractorAPI(Vidhidetoul())
+        registerExtractorAPI(DoodCom())
+        registerExtractorAPI(DoodTo())
+        registerExtractorAPI(DoodWatch())
+        registerExtractorAPI(DoodLa())
+        registerExtractorAPI(DoodPm())
+        registerExtractorAPI(DoodSh())
+        registerExtractorAPI(DoodWs())
+        registerExtractorAPI(DoodOne())
+        registerExtractorAPI(DoodSo())
+        registerExtractorAPI(DoodWork())
+        registerExtractorAPI(Lulustream())
         registerExtractorAPI(Luluvid())
-        registerExtractorAPI(Xtapes())
+        registerExtractorAPI(Luluvdo())
+        registerExtractorAPI(Lulust())
+        registerExtractorAPI(CdnTelly())
         registerExtractorAPI(Ultrastream())
+        registerExtractorAPI(Bysezoxexe())
+        registerExtractorAPI(VidaraTo())
+        registerExtractorAPI(Vidhideplus())
+        registerExtractorAPI(Vidhidehub())
+        registerExtractorAPI(Pixeldrain())
     }
 
     companion object {
-        var cachedDomains: Domains = Domains("https://tellyhd.st")
+        var cachedDomains: Domains? = Domains("https://tellyhd.st")
 
-        suspend fun getDomains(forceRefresh: Boolean = false): Domains {
+        suspend fun getDomains(forceRefresh: Boolean = false): Domains? {
             return cachedDomains
         }
 
