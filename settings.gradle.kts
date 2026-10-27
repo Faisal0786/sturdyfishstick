@@ -32,3 +32,4 @@ include(":XXXTime")
 include(":Aagmaal")
 
 include(":XHamster")
+include(":xVideos")
