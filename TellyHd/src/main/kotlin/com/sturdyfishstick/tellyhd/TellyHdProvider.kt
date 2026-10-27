@@ -7,13 +7,16 @@ import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.loadExtractor
+import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.time.Year
 
 class TellyHD : MainAPI() {
 
-    override var mainUrl: String = "https://tellyhd.st"
+    override var mainUrl: String = runBlocking {
+        TellyHDPlugin.getDomains()?.Tellyhd ?: "https://tellyhd.st"
+    }
     override var name = "TellyHD"
     override val hasMainPage = true
     override var lang = "hi"
@@ -21,7 +24,6 @@ class TellyHD : MainAPI() {
     override val vpnStatus = VPNStatus.MightBeNeeded
     private val directUrl = ""
 
-    // Common headers to prevent timeout and blocking
     private val headers = mapOf(
         "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
@@ -114,20 +116,29 @@ class TellyHD : MainAPI() {
             posterUrl = fixUrlNull(document.select("div.poster img").attr("src"))
         }
         val description = document.select("div.wp-content > p").text().trim()
+        
         val episodes = document.select("ul#playeroptionsul > li").mapNotNull { li ->
-            val name = li.selectFirst("span.title")?.text()
+            val name = li.selectFirst("span.title")?.text()?.trim()
+                ?: li.select("span").text().trim()
+                ?: li.text().trim()
+            
             val type = li.attr("data-type")
             val post = li.attr("data-post")
             val nume = li.attr("data-nume")
-            if (name?.contains("trailer", ignoreCase = true) == true || name?.contains("dood", ignoreCase = true) == true) return@mapNotNull null
+            
+            if (post.isNullOrEmpty() || nume.isNullOrEmpty()) return@mapNotNull null
+            if (name.contains("trailer", ignoreCase = true)) return@mapNotNull null
+            
             val json = LinkData(type, post, nume).toJson()
             newEpisode(json) {
-                this.name = name
+                this.name = name.ifEmpty { "Server" }
             }
         }
 
-        return if (url.contains("/movies/") || episodes.size <= 1) {
-            newMovieLoadResponse(title, url, TvType.Movie, episodes.firstOrNull()?.data ?: "") {
+        val isMovie = url.contains("/movies/") || episodes.size <= 1
+
+        return if (isMovie && episodes.isNotEmpty()) {
+            newMovieLoadResponse(title, url, TvType.Movie, episodes.first().data) {
                 this.posterUrl = posterUrl
                 this.plot = description
             }
@@ -145,16 +156,31 @@ class TellyHD : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val loadData = tryParseJson<LinkData>(data)
-        val iframe = app.post(
-            url = "$mainUrl/wp-admin/admin-ajax.php", data = mapOf(
-                "action" to "doo_player_ajax", "post" to "${loadData?.post}", "nume" to "${loadData?.nume}", "type" to "${loadData?.type}"
-            ), referer = data, headers = headers
-        ).parsed<ResponseHash>().embedUrl.getIframe()
+        val loadData = tryParseJson<LinkData>(data) ?: return false
+        
+        val res = app.post(
+            url = "$mainUrl/wp-admin/admin-ajax.php",
+            data = mapOf(
+                "action" to "doo_player_ajax",
+                "post" to "${loadData.post}",
+                "nume" to "${loadData.nume}",
+                "type" to "${loadData.type}"
+            ),
+            referer = mainUrl,
+            headers = headers
+        ).text
 
-        if (!iframe.contains("youtube")) {
-            loadExtractor(iframe, "$directUrl/", subtitleCallback, callback)
+        val iframeUrl = Jsoup.parse(res).select("iframe").attr("src").ifEmpty {
+            Jsoup.parse(res).select("iframe").attr("data-src")
+        }.ifEmpty {
+            Regex("https?://[^\\s\"']+").find(res)?.value ?: ""
         }
+
+        if (iframeUrl.isNotEmpty()) {
+            val fixedUrl = if (iframeUrl.startsWith("//")) "https:$iframeUrl" else iframeUrl
+            loadExtractor(fixedUrl, "$mainUrl/", subtitleCallback, callback)
+        }
+        
         return true
     }
 
@@ -167,18 +193,9 @@ class TellyHD : MainAPI() {
         }
     }
 
-    private fun String.getIframe(): String {
-        return Jsoup.parse(this).select("iframe").attr("src")
-    }
-
     data class LinkData(
         val type: String? = null,
         val post: String? = null,
         val nume: String? = null,
-    )
-
-    data class ResponseHash(
-        @JsonProperty("embed_url") val embedUrl: String,
-        val type: String,
     )
 }
