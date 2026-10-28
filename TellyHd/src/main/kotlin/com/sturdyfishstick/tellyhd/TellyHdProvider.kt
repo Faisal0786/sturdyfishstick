@@ -115,14 +115,15 @@ class TellyHD : MainAPI() {
         }
         val description = document.select("div.wp-content > p").text().trim()
         
-        val episodes = document.select("ul#playeroptionsul > li").mapNotNull { li ->
+        // Comprehensive multi-selector to ensure no server list is missed
+        val episodes = document.select("ul#playeroptionsul > li, div.play-options li, .sources-box li, .dooplay_player_option").mapNotNull { li ->
             val name = li.selectFirst("span.title")?.text()?.trim() 
                 ?: li.select("span").text().trim() 
                 ?: li.text().trim()
             
-            val type = li.attr("data-type")
-            val post = li.attr("data-post")
-            val nume = li.attr("data-nume")
+            val type = li.attr("data-type").ifEmpty { li.attr("data-film") }.ifEmpty { "movie" }
+            val post = li.attr("data-post").ifEmpty { li.attr("data-id") }
+            val nume = li.attr("data-nume").ifEmpty { li.attr("data-episode") }.ifEmpty { "1" }
             
             if (post.isNullOrEmpty() || nume.isNullOrEmpty()) return@mapNotNull null
             if (name.contains("trailer", ignoreCase = true)) return@mapNotNull null
