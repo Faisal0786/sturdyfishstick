@@ -30,6 +30,7 @@ class TellyHDPlugin : Plugin() {
         registerExtractorAPI(VidaraTo())
         registerExtractorAPI(Vidhideplus())
         registerExtractorAPI(Vidhidehub())
+        registerExtractorAPI(TellyXin())
         registerExtractorAPI(Pixeldrain())
     }
 
