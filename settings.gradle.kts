@@ -1,32 +1,19 @@
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { setUrl("https://jitpack.io") }
+rootProject.name = "CloudstreamPlugins"
+
+// This file sets what projects are included. All new projects should get automatically included unless specified in "disabled" variable.
+
+val disabled = listOf<String>()
+
+File(rootDir, ".").eachDir { dir ->
+    if (!disabled.contains(dir.name) && File(dir, "build.gradle.kts").exists()) {
+        include(dir.name)
     }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-
-    repositories {
-        google()
-        mavenCentral()
-        maven { setUrl("https://jitpack.io") }
-    }
+fun File.eachDir(block: (File) -> Unit) {
+    listFiles()?.filter { it.isDirectory }?.forEach { block(it) }
 }
 
-rootProject.name = "sturdyfishstick"
 
-include(":Watchporn")
-include(":BrazzPw")
-include(":XmoviesForYou")
-include(":FreePornVideos")
-include(":XXXTime")
-include(":Aagmaal")
-include(":XHamster")
-include(":xVideos")
-include(":TellyHd")
-
-
+// To only include a single project, comment out the previous lines (except the first one), and include your plugin like so:
+// include("XXXTime")
