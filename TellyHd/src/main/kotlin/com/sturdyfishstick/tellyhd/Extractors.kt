@@ -62,6 +62,11 @@ class Vidhidehub : VidhideExtractor() {
     override var name = "Ultra Stream"
 }
 
+class TellyXin : VidhideExtractor() {
+    override var mainUrl = "https://telly.xin"
+    override var name = "Ultra Stream"
+}
+
 // --- Doodstream Mirrors ---
 open class Ds2play : ExtractorApi() {
     override var name = "DoodStream"
