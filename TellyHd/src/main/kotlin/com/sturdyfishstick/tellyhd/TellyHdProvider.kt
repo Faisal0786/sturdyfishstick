@@ -19,7 +19,7 @@ import java.time.Year
 class TellyHd : MainAPI() {
 
     override var mainUrl: String = runBlocking {
-        TollyProProvider.getDomains()?.Tellyhd ?: "https://tellyhd.media"
+        TellHdProvider.getDomains()?.Tellyhd ?: "https://tellyhd.media"
     }
     override var name = "TellyHD"
     override val hasMainPage= true
