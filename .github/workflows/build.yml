@@ -54,9 +54,9 @@ jobs:
         run: |
           if [ -f "gradlew" ] && [ -f "gradle/wrapper/gradle-wrapper.jar" ]; then
             chmod +x gradlew
-            ./gradlew makePluginsJson --stacktrace || ./gradlew build --stacktrace
+            ./gradlew makeRepo --stacktrace || ./gradlew build --stacktrace
           else
-            gradle makePluginsJson --stacktrace || gradle build --stacktrace
+            gradle makeRepo --stacktrace || gradle build --stacktrace
           fi
 
       - name: Ensure Real Plugin Names, Official Logos & Valid Hashes
@@ -102,7 +102,7 @@ jobs:
               sz = len(content)
               cs3_hashes[base] = (h, sz)
 
-          for pjson in ['build/plugins.json', 'plugins.json']:
+          for pjson in ['build/plugins.json', 'plugins.json', 'build/repo/plugins.json']:
               if os.path.exists(pjson):
                   with open(pjson, 'r') as f:
                       data = json.load(f)
@@ -126,14 +126,22 @@ jobs:
           mkdir -p $RUNNER_TEMP/build_artifacts
           find . -name "*.cs3" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
           find . -name "*.jar" ! -name "gradle-wrapper.jar" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
+          
+          # Find plugins.json from possible gradle output locations
           if [ -f "build/plugins.json" ]; then
             cp build/plugins.json $RUNNER_TEMP/build_artifacts/
           elif [ -f "plugins.json" ]; then
             cp plugins.json $RUNNER_TEMP/build_artifacts/
+          elif [ -f "build/repo/plugins.json" ]; then
+            cp build/repo/plugins.json $RUNNER_TEMP/build_artifacts/
           fi
+          
           if [ -f "repo.json" ]; then
             cp repo.json $RUNNER_TEMP/build_artifacts/
+          elif [ -f "build/repo/repo.json" ]; then
+            cp build/repo/repo.json $RUNNER_TEMP/build_artifacts/
           fi
+          
           ls -la $RUNNER_TEMP/build_artifacts/
 
       - name: Upload Build Artifacts (Zip)
