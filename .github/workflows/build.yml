@@ -1,4 +1,4 @@
-name: Build sturdyfishstick plugins
+Name: Build sturdyfishstick plugins
 
 concurrency:
   group: "build-${{ github.ref }}"
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.12"
+          gradle-version: "9.3.1"
 
       - name: Normalize Manifests & Prepare Environment
         run: |
@@ -121,39 +121,4 @@ jobs:
           "
 
       - name: Verify Output Artifacts
-        run: |
-          echo "=== Verifying Generated Files ==="
-          mkdir -p $RUNNER_TEMP/build_artifacts
-          find . -name "*.cs3" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
-          find . -name "*.jar" ! -name "gradle-wrapper.jar" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
-          if [ -f "build/plugins.json" ]; then
-            cp build/plugins.json $RUNNER_TEMP/build_artifacts/
-          elif [ -f "plugins.json" ]; then
-            cp plugins.json $RUNNER_TEMP/build_artifacts/
-          fi
-          if [ -f "repo.json" ]; then
-            cp repo.json $RUNNER_TEMP/build_artifacts/
-          fi
-          ls -la $RUNNER_TEMP/build_artifacts/
-
-      - name: Upload Build Artifacts (Zip)
-        uses: actions/upload-artifact@v4
-        with:
-          name: allanime-plugins
-          path: ${{ runner.temp }}/build_artifacts/*
-          retention-days: 14
-
-      - name: Deploy to Builds Branch
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git checkout -B builds
-          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-          cp -r $RUNNER_TEMP/build_artifacts/* ./
-          git add -A
-          if git diff-index --quiet HEAD --; then
-            echo "No changes to commit."
-          else
-            git commit -m "Automated Allanime build: ${{ github.sha }}"
-            git push origin builds --force
-          fi
+        run
