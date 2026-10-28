@@ -59,27 +59,22 @@ jobs:
             gradle makeRepo --stacktrace || gradle build --stacktrace
           fi
 
-      - name: Verify Output Artifacts
+      - name: Verify and Collect All Output Artifacts
         run: |
-          echo "=== Verifying Generated Files ==="
+          echo "=== Collecting Generated Files ==="
           mkdir -p $RUNNER_TEMP/build_artifacts
           
+          # Sabhi .cs3 files ko poori repository se dhoond kar copy karein
           find . -name "*.cs3" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
+          
+          # Agar plugins.json kisi bhi folder me bani ho toh use dhoondein
+          find . -name "plugins.json" ! -path "./.git/*" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
+          
+          # Agar repo.json ho toh use bhi le lein
+          find . -name "repo.json" ! -path "./.git/*" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
+          
+          # Agar kuch .jar files zaroori hain toh unhe bhi rakh lein
           find . -name "*.jar" ! -name "gradle-wrapper.jar" -exec cp {} $RUNNER_TEMP/build_artifacts/ \;
-          
-          if [ -f "build/repo/plugins.json" ]; then
-            cp build/repo/plugins.json $RUNNER_TEMP/build_artifacts/
-          elif [ -f "build/plugins.json" ]; then
-            cp build/plugins.json $RUNNER_TEMP/build_artifacts/
-          elif [ -f "plugins.json" ]; then
-            cp plugins.json $RUNNER_TEMP/build_artifacts/
-          fi
-          
-          if [ -f "build/repo/repo.json" ]; then
-            cp build/repo/repo.json $RUNNER_TEMP/build_artifacts/
-          elif [ -f "repo.json" ]; then
-            cp repo.json $RUNNER_TEMP/build_artifacts/
-          fi
           
           ls -la $RUNNER_TEMP/build_artifacts/
 
@@ -101,6 +96,6 @@ jobs:
           if git diff-index --quiet HEAD --; then
             echo "No changes to commit."
           else
-            git commit -m "Automated clean build: ${{ github.sha }}"
+            git commit -m "Automated fix for plugins.json and cs3: ${{ github.sha }}"
             git push origin builds --force
           fi
