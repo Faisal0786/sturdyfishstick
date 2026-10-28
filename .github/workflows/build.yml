@@ -1,4 +1,4 @@
-name: Build SturdFishstick Plugins
+name: Build SturdyFishstick Plugins
 
 concurrency:
   group: "build-${{ github.ref }}"
@@ -65,17 +65,41 @@ jobs:
           import json, glob, zipfile, os, hashlib
 
           PLUGIN_META = {
-              'BlakitePlugin': {
-                  'name': 'Blakite Anime',
-                  'iconUrl': 'https://blogger.googleusercontent.com/img/a/AVvXsEgWJNM8v7dkKlHDuBncLOZsjiURJtbxv6de_W_TkIg75W51emlvr-3DATj02j__QUikkzjxhYKv8jYtQp4lc04xObvSTvthIHg_DA0Ud4SRiEUKqralljdfKnUumPN96NEBQwW6y0SpVKcCCPzuIwh8on5sgzjH7BT5PpR6_vp_qS7Qia8OMj04qz-DyMw=s937'
+              'TellyHd': {
+                  'name': 'TellyHd',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=TellyHd&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
               },
-              'ZLivePlugin': {
-                  'name': 'ZLive',
-                  'iconUrl': 'https://ui-avatars.com/api/?name=ZLive&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              'Aagmaal': {
+                  'name': 'Aagmaal',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=Aagmaal&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
               },
-              'AnimeDekhoPlugin': {
-                  'name': 'AnimeDekho',
-                  'iconUrl': 'https://animedekho.app/wp-content/uploads/2023/02/cropped-favicon-270x270.png'
+              'BrazzPw': {
+                  'name': 'BrazzPw',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=BrazzPw&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'Watchporn': {
+                  'name': 'Watchporn',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=Watchporn&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'XmoviesForYou': {
+                  'name': 'XmoviesForYou',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=Xmovies&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'xVideos': {
+                  'name': 'xVideos',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=xVideos&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'FreePornVideos': {
+                  'name': 'FreePornVideos',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=FPV&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'XHamster': {
+                  'name': 'XHamster',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=XHamster&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
+              },
+              'XXXTime': {
+                  'name': 'XXXTime',
+                  'iconUrl': 'https://ui-avatars.com/api/?name=XXXTime&background=0d0d0d&color=8288fe&size=512&bold=true&length=2'
               }
           }
 
@@ -139,7 +163,7 @@ jobs:
       - name: Upload Build Artifacts (Zip)
         uses: actions/upload-artifact@v4
         with:
-          name: allanime-plugins
+          name: sturdyfishstick-plugins
           path: ${{ runner.temp }}/build_artifacts/*
           retention-days: 14
 
@@ -154,6 +178,6 @@ jobs:
           if git diff-index --quiet HEAD --; then
             echo "No changes to commit."
           else
-            git commit -m "Automated Allanime build: ${{ github.sha }}"
+            git commit -m "Automated build update: ${{ github.sha }}"
             git push origin builds --force
           fi
