@@ -70,10 +70,21 @@ class TellyXin : ExtractorApi() {
     override suspend fun getUrl(url: String, referer: String?): List<ExtractorLink>? {
         val doc = app.get(url, referer = referer).document
         
+        // Script tags aur iframe dono se direct stream URL dhoondne ke liye robust regex
         val script = doc.select("script").html()
-        val videoUrl = Regex("https?://[^\\s\"']+\\.(m3u8|mp4)").find(script)?.value 
+        var videoUrl = Regex("https?://[^\\s\"']+\\.(m3u8|mp4)").find(script)?.value 
             ?: doc.select("source").attr("src")
             ?: doc.select("iframe").attr("src")
+
+        if (videoUrl.isEmpty()) {
+            // Fallback: eval ya packed scripts ko check karna agar zaroorat ho
+            val evalScript = doc.select("script").let { scripts ->
+                scripts.find { it.data().contains("eval") }?.data()
+            }
+            if (evalScript != null) {
+                videoUrl = Regex("https?://[^\\s\"']+\\.(m3u8|mp4)").find(evalScript)?.value ?: ""
+            }
+        }
 
         if (videoUrl.isEmpty()) return null
 
