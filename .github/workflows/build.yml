@@ -26,14 +26,14 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Plugins
-        run: ./gradlew makePlugins
+        run: ./gradlew make
 
       - name: Deploy to builds branch
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Collect all compiled .cs3 files into a temporary folder outside git tracking temporarily
+          # Collect all compiled .cs3 files into a temporary folder
           mkdir -p plugin_output
           find . -name "*.cs3" -exec cp {} plugin_output/ \;
 
