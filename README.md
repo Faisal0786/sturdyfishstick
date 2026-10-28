@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🇮🇳 Sturdy Fishstick Extensions & StreamHub One Repository 🎬
+# 🇮🇳 Sturdy Fishstick Extensions & Stream Repository 🎬
 
 
   [Paste Cloudstream Repository](https://raw.githubusercontent.com/techmind09/sturdyfishstick/refs/heads/builds/repo.json)
