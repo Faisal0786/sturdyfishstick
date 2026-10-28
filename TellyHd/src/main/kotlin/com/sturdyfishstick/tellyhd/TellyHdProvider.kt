@@ -125,7 +125,6 @@ class TellyHD : MainAPI() {
             val nume = li.attr("data-nume")
             
             if (post.isNullOrEmpty() || nume.isNullOrEmpty()) return@mapNotNull null
-            // Trailers ko chhor kar baaki sabhi servers (jaise DoodStream, Lulustream, etc.) ko allow karein
             if (name.contains("trailer", ignoreCase = true)) return@mapNotNull null
             
             val json = LinkData(type, post, nume).toJson()
@@ -157,28 +156,20 @@ class TellyHD : MainAPI() {
     ): Boolean {
         val loadData = tryParseJson<LinkData>(data) ?: return false
         
-        val res = app.post(
-            url = "$mainUrl/wp-admin/admin-ajax.php",
-            data = mapOf(
-                "action" to "doo_player_ajax",
-                "post" to "${loadData.post}",
-                "nume" to "${loadData.nume}",
-                "type" to "${loadData.type}"
-            ),
-            referer = mainUrl,
+        // Updated Dooplayer REST API endpoint found from network inspection
+        val response = app.get(
+            url = "$mainUrl/wp-json/dooplayer/v2/${loadData.post}/${loadData.type}/${loadData.nume}",
             headers = headers
-        ).text
+        ).parsed<ResponseHash>()
 
-        // Safe extraction of iframe or embed URL from AJAX response
-        val iframeUrl = Jsoup.parse(res).select("iframe").attr("src").ifEmpty {
-            Jsoup.parse(res).select("iframe").attr("data-src")
-        }.ifEmpty {
-            Regex("https?://[^\\s\"']+").find(res)?.value ?: ""
+        val embedHtml = response.embedUrl ?: return false
+        val iframeUrl = Jsoup.parse(embedHtml).select("iframe").attr("src").ifEmpty {
+            Regex("https?://[^\\s\"']+").find(embedHtml)?.value ?: ""
         }
 
         if (iframeUrl.isNotEmpty() && !iframeUrl.contains("youtube")) {
             val fixedUrl = if (iframeUrl.startsWith("//")) "https:$iframeUrl" else iframeUrl
-            loadExtractor(fixedUrl, "$mainUrl/", subtitleCallback, callback)
+            loadExtractor(fixedUrl, fixedUrl, subtitleCallback, callback)
         }
         
         return true
@@ -197,5 +188,10 @@ class TellyHD : MainAPI() {
         val type: String? = null,
         val post: String? = null,
         val nume: String? = null,
+    )
+
+    data class ResponseHash(
+        @JsonProperty("embed_url") val embedUrl: String? = null,
+        val type: String? = null,
     )
 }
