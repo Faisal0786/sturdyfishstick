@@ -1,4 +1,4 @@
-Name: Build sturdyfishstick plugins
+name: Build sturdyfishstick plugins
 
 concurrency:
   group: "build-${{ github.ref }}"
