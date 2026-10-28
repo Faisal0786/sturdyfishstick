@@ -2,42 +2,41 @@ package com.sturdyfishstick.tellyhd
 
 import android.content.Context
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.lagradost.cloudstream3.app
+import com.lagradost.cloudstream3.extractors.VidHidePro3
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
 import com.lagradost.cloudstream3.plugins.Plugin
 
 @CloudstreamPlugin
-class TellyHDPlugin : Plugin() {
+class TellyHdPlugin: Plugin() {
     override fun load(context: Context) {
-        registerMainAPI(TellyHD())
+        registerMainAPI(Tellyhd())
         registerExtractorAPI(Ds2play())
-        registerExtractorAPI(DoodCom())
-        registerExtractorAPI(DoodTo())
-        registerExtractorAPI(DoodWatch())
-        registerExtractorAPI(DoodLa())
-        registerExtractorAPI(DoodPm())
-        registerExtractorAPI(DoodSh())
-        registerExtractorAPI(DoodWs())
-        registerExtractorAPI(DoodOne())
-        registerExtractorAPI(DoodSo())
-        registerExtractorAPI(DoodWork())
-        registerExtractorAPI(Lulustream())
-        registerExtractorAPI(Luluvid())
-        registerExtractorAPI(Luluvdo())
-        registerExtractorAPI(Lulust())
-        registerExtractorAPI(CdnTelly())
-        registerExtractorAPI(Ultrastream())
-        registerExtractorAPI(Bysezoxexe())
-        registerExtractorAPI(VidaraTo())
-        registerExtractorAPI(Vidhideplus())
+        registerExtractorAPI(Vidsp())
+        registerExtractorAPI(VidHidePro3())
+        registerExtractorAPI(VidHideplus())
+        registerExtractorAPI(VidHidedht())
         registerExtractorAPI(Vidhidehub())
-        registerExtractorAPI(TellyXin())
-        registerExtractorAPI(Pixeldrain())
+        registerExtractorAPI(Bigwarp())
+        registerExtractorAPI(Vidhidetoul())
+        registerExtractorAPI(Luluvid())
+        registerExtractorAPI(Xtapes())
     }
 
     companion object {
-        var cachedDomains: Domains? = Domains("https://tellyhd.st")
+        private const val DOMAINS_URL =
+            "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/domains.json"
+        var cachedDomains: Domains? = null
 
         suspend fun getDomains(forceRefresh: Boolean = false): Domains? {
+            if (cachedDomains == null || forceRefresh) {
+                try {
+                    cachedDomains = app.get(DOMAINS_URL).parsedSafe<Domains>()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    return null
+                }
+            }
             return cachedDomains
         }
 
