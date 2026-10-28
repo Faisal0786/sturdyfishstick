@@ -62,9 +62,35 @@ class Vidhidehub : VidhideExtractor() {
     override var name = "Ultra Stream"
 }
 
-class TellyXin : VidhideExtractor() {
+class TellyXin : ExtractorApi() {
     override var mainUrl = "https://telly.xin"
     override var name = "Ultra Stream"
+    override val requiresReferer = false
+
+    override suspend fun getUrl(url: String, referer: String?): List<ExtractorLink>? {
+        val doc = app.get(url, referer = referer).document
+        
+        val script = doc.select("script").html()
+        val videoUrl = Regex("https?://[^\\s\"']+\\.(m3u8|mp4)").find(script)?.value 
+            ?: doc.select("source").attr("src")
+            ?: doc.select("iframe").attr("src")
+
+        if (videoUrl.isEmpty()) return null
+
+        val fixedUrl = if (videoUrl.startsWith("//")) "https:$videoUrl" else videoUrl
+
+        return listOf(
+            newExtractorLink(
+                source = this.name,
+                name = this.name,
+                url = fixedUrl,
+                INFER_TYPE
+            ) {
+                this.referer = mainUrl
+                this.quality = Qualities.P1080.value
+            }
+        )
+    }
 }
 
 // --- Doodstream Mirrors ---
